@@ -409,6 +409,16 @@ export default {
 </script>
 
 <style lang="scss">
+.v-otp-input .v-input {
+    margin: 0;
+    flex: 1 0 32px;
+    max-width: 100%;
+    width: 100%;
+    padding: 4px;
+    border-radius: 24px !important;
+}
+
 .linkColor {
     color: #8a98e6 !important;
 }
+</style>
