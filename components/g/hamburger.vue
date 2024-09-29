@@ -2,13 +2,13 @@
     <div class="py-3 cursor-pointer" v-on="$listeners" @click="hamburgerManager">
         <div class="h-flex items-center w-10 h-5 relative">
             <div ref="topLeft" class="h-1.5 w-6 absolute top-0 left-0 rounded-xl"
-                :class="$s.dark ? $store.state.pageColor + ' lighten-4' : $store.state.pageColor + ' darken-6'" />
+                :class="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-1'" />
             <div ref="topRight" class="h-1.5 w-6 absolute top-0 right-0 rounded-xl"
-                :class="$s.dark ? $store.state.pageColor + ' lighten-4' : $store.state.pageColor + ' darken-6'" />
+                :class="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-1'" />
             <div ref="bottomLeft" class="h-1.5 w-6 absolute bottom-0 left-0 rounded-xl"
-                :class="$s.dark ? $store.state.pageColor + ' lighten-4' : $store.state.pageColor + ' darken-6'" />
+                :class="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-1'" />
             <div ref="bottomRight" class="h-1.5 w-6 absolute bottom-0 right-0 rounded-xl"
-                :class="$s.dark ? $store.state.pageColor + ' lighten-4' : $store.state.pageColor + ' darken-6'" />
+                :class="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-1'" />
         </div>
     </div>
 </template>

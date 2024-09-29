@@ -2,7 +2,7 @@
     <div>
         <s-falcon :viva="true" xs="bar" md="drawer" :width="$s.mdAndUp ? 96 : null" flat permanent
             class="main-navigation-container" :right="$s.rtl"
-            :sw-options="{ parentClass: `${$s.dark ? 'blue-grey darken-4' : $store.state.pageColor + ' lighten-5'} w-full` }">
+            :sw-options="{ parentClass: `${$s.dark ? null : 'yellow lighten-4'} w-full`, parentStyle: $s.dark ? 'background-color: #0d1019 !important;' : null }">
             <div class="flex flex-col justify-between items-center h-full">
                 <div dir="rtl"
                     class="w-full h-full flex justify-between md:justify-center items-center md:items-start px-5 md:px-0">
@@ -12,7 +12,48 @@
                             <g-search :schema="{ dataset: ['search'] }" />
                         </div>
                         <g-call v-show="$s.smAndDown" /> -->
-                        <div class="h-12">
+                        <!-- اضافه کردن دکمه ورود/ثبت نام یا منوی کاربر -->
+                        <div class="flex gap-2 items-center h-full">
+                            <div v-if="!isLoggedIn">
+                                <s-btn class="cursor-pointer" rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor">
+                                    <svg-icon name="account"
+                                        :class="$s.dark ? $store.state.pageColor + '--text text--lighten-6' : $store.state.pageColor + '--text text--darken-6'"
+                                        class="w-6 h-6 -mr-2" />
+                                    <div class="flex items-center pr-2">
+                                        <nuxt-link to="/">
+                                            <g-text data="ورود / ثبت نام" />
+                                        </nuxt-link>
+                                    </div>
+                                </s-btn>
+                            </div>
+                            <div v-else>
+                                <!-- استفاده از v-menu برای نمایش گزینه‌های کاربر -->
+                                <v-menu offset-y>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-btn v-bind="attrs" v-on="on" s-text-field
+                                            :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor" rounded>
+                                            <svg-icon name="account"
+                                                :class="$s.dark ? $store.state.pageColor + '--text text--lighten-6' : $store.state.pageColor + '--text text--darken-6'"
+                                                class="w-6 h-6 ml-1 -mr-2" />
+                                            {{ userName }}
+                                        </v-btn>
+                                    </template>
+                                    <v-list>
+                                        <v-list-item disabled @click="goToProfile">
+                                            <v-list-item-title>پروفایل</v-list-item-title>
+                                        </v-list-item>
+                                        <v-list-item @click="goToWarrantyList">
+                                            <v-list-item-title>لیست گارانتی های ثبت شده</v-list-item-title>
+                                        </v-list-item>
+                                        <v-list-item @click="logout">
+                                            <v-list-item-title>خروج</v-list-item-title>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-menu>
+                            </div>
+                        </div>
+                        <div class="h-12 -ml-14">
                             <nuxt-link :to="localePath('/')" aria-label="logo">
                                 <g-logo :icon="$s.dark ? '../New_Project.png' : '../New_Project_4.png'"
                                     iconWidth="160px" />
@@ -96,8 +137,8 @@
                         style="max-height: calc(100vh - 224px)">
                         <div v-for="(item, i) in menu" :key="i" id="primary-anim-item"
                             class="primary-anim-item !rounded-md flex flex-col md:flex-row my-1 px-4 py-2"
-                            @mouseenter="$s.mdAndUp ? mouseEnterHandler(item) : null"
-                            :style="$s.dark ? 'background-color: #0d1019;' : 'background-color: #FFF9C4;'" :class="[
+                            @mouseenter="$s.mdAndUp ? mouseEnterHandler(item) : null" :class="[
+                                $s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-4',
                                 { '!rounded-t-3xl': i == 0 },
                                 { '!rounded-b-3xl': i == menu.length - 1 },
                             ]">
@@ -153,12 +194,12 @@
                 </v-row>
                 <div class="p-5">
                     <div id="bottom-anim-item"
-                        :style="$s.dark ? 'background-color: #0d1019;' : 'background-color: #FFF9C4;'"
+                        :class="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-4'"
                         class="flex justify-between items-center p-2 rounded-3xl">
                         <g-social class="w-fit rounded-full" :data="social_networks"
                             :color="$store.state.pageColor + '--text text--darken-3'"
                             :style="$s.dark ? 'background-color: #040b25;' : null"
-                            :class="$s.dark ? 'rounded-full' : $store.state.pageColor + ' lighten-4 rounded-full'" />
+                            :class="$s.dark ? 'rounded-full' : $store.state.pageColor + ' lighten-5 rounded-full'" />
                         <div class="flex items-center justify-between">
                             <div @click="toggleNav">
                                 <g-dark-mode btn size="20" />
@@ -183,6 +224,7 @@ export default {
             menu: [
                 { title: 'خانه', slug: '/' },
                 { title: 'گارانتی', slug: '/warranty' },
+                { title: 'لیست گارانتی های ثبت شده', slug: '/warranty-list' },
                 { title: 'ارتباط با ما', slug: '/contact' }
             ],
 
@@ -208,6 +250,23 @@ export default {
             currentItem: {},
             closingTimeout: null,
             openingTimeout: null
+        }
+    },
+
+    computed: {
+        filteredMenu() {
+            return this.menu.filter((item) => {
+                if (item.slug === '/warranty' || item.slug === '/warranty-list') {
+                    return this.$store.getters.isLoggedIn; // نمایش گارانتی‌ها تنها برای کاربران لاگین شده
+                }
+                return true;
+            });
+        },
+        isLoggedIn() {
+            return this.$store.getters.isLoggedIn;
+        },
+        userName() {
+            return this.$store.state.auth.userName || this.$store.state.auth.phone; // نمایش نام کاربر یا شماره موبایل
         }
     },
 
@@ -361,6 +420,16 @@ export default {
             } else {
                 this.secondaryAnim && this.secondaryAnim.reverse()
             }
+        },
+        goToProfile() {
+            this.$router.push('/profile');
+        },
+        goToWarrantyList() {
+            this.$router.push('/warranty-list');
+        },
+        logout() {
+            this.$store.commit('clearAuthToken'); // حذف اطلاعات ورود
+            this.$router.push('/'); // ریدایرکت به صفحه اصلی
         }
     },
 

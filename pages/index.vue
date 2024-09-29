@@ -204,8 +204,8 @@
 export default {
     head() {
         return this.$headBuilder({
-            title: 'ssss',
-            description: 'sssddd'
+            title: 'شرکت صنعت دوخت و برش پردیس',
+            description: 'با مسئولیت محدود و شماره ثبت 2441'
         })
     },
 

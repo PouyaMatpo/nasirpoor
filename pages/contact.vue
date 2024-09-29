@@ -62,6 +62,13 @@
 
 <script>
 export default {
+    head() {
+        return this.$headBuilder({
+            title: 'ارتباط با ما',
+            description: 'با مسئولیت محدود و شماره ثبت 2441'
+        })
+    },
+
     data() {
         return {
             contacts: [

@@ -1,9 +1,9 @@
 <template>
     <div :style="$s.dark ? 'background-color: #1d283a;' : 'background-color: #FFFDE7;'">
         <g-container>
-            <div class="flex justify-between md:items-center gap-6 md:flex-row flex-col-reverse">
+            <div class="flex justify-between md:items-center md:gap-6 md:flex-row flex-col-reverse">
                 <div class="md:w-1/2">
-                    <g-text class="py-6" data="ثبت گارانتی" />
+                    <g-text class="md:py-6 md:!pb-0 !pb-6" data="ثبت گارانتی" />
                     <s-form class="pb-20" color="transparent" xs="block" @submit.prevent="submitRegister"
                         ref="registerForm" noActions>
 
@@ -40,6 +40,13 @@
 
 <script>
 export default {
+    head() {
+        return this.$headBuilder({
+            title: 'ثبت گارانتی',
+            description: 'با مسئولیت محدود و شماره ثبت 2441'
+        })
+    },
+
     middleware: 'auth',
 
     mounted() {

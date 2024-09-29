@@ -118,6 +118,13 @@
 
 <script>
 export default {
+    head() {
+        return this.$headBuilder({
+            title: 'لیست دستگاه های گارانتی شده',
+            description: 'با مسئولیت محدود و شماره ثبت 2441'
+        })
+    },
+
     middleware: 'auth',
 
     mounted() {
