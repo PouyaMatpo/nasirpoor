@@ -90,6 +90,7 @@
                                             :background-color="$s.dark ? 'cyan darken-5' : 'yellow lighten-4'"
                                             :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor" :length="length"
                                             dir="ltr"></s-otp-input>
+                                            <!-- ssssssss -->
                                         <div class="flex justify-center w-full mt-4">
                                             <!-- <div v-if="timer === 0" class="font-bold text-xl cursor-pointer"
                                                 @click="requestNewOtp">
