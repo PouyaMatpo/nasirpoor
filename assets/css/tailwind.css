@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-display: swap;
+        src:url("../../assets/font/IRANSans/IRANSansXV.woff") format("woff-variations"),
+            url("../../assets/font/IRANSans/IRANSansXV.woff") format("woff");
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 100;
+        src: url('../../assets/font/roboto/roboto-100.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 300;
+        src: url('../../assets/font/roboto/roboto-300.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+        src: url('../../assets/font/roboto/roboto-400.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 500;
+        src: url('../../assets/font/roboto/roboto-500.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 700;
+        src: url('../../assets/font/roboto/roboto-700.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 900;
+        src: url('../../assets/font/roboto/roboto-900.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'RubikItalic';
+        font-style: italic;
+        font-display: swap;
+        font-weight: 900;
+        src: url('../../assets/font/Rubik/Rubik-BlackItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Rubik';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 900;
+        src: url('../../assets/font/Rubik/Rubik-Black.ttf') format('truetype');
+    }
+    
+    h1 {
+        @apply s-heading2 
+    }
+    h2 {
+        @apply s-heading3
+    }
+    h3 {
+        @apply s-heading4
+    }
+    h4 {
+        @apply s-heading5
+    }
+    h5 {
+        @apply s-heading6
+    }
+    h6 {
+        @apply s-subtitle2
+    }
+    p {
+        @apply s-body1 !mb-0
+    }
+
+    @screen md {
+        h1 {
+            @apply s-heading1
+        }
+        h2 {
+            @apply s-heading2
+        }
+        h3 {
+            @apply s-heading3
+        }
+        h4 {
+            @apply s-heading4
+        }
+        h5 {
+            @apply s-heading5
+        }
+        h6 {
+            @apply s-heading6
+        }
+    }
+
+    blockquote {
+        @apply rtl:border-r-4 ltr:border-l-4 s-quote rtl:pr-3 ltr:pl-3 my-3 border-r-gray-400
+    }
+
+    ul{
+        @apply s-body1 !px-8 mb-4;
+        list-style: circle;
+    }
+
+    ol{
+        @apply s-body1 !px-8 mb-4 list-decimal;
+    }
+
+    blockquote p{
+        @apply s-quote 
+    }
+
+    caption {
+        @apply s-caption
+    }
+}   
+
+@layer utilities {
+    .post-content h1 {
+        @apply mb-4
+    }
+    .post-content h2 {
+        @apply my-3
+    }
+    .post-content h3 {
+        @apply my-2
+    }
+    .post-content h4 {
+        @apply my-1
+    }
+    .post-content h5 {
+        @apply my-1
+    }
+    .post-content h6 {
+        @apply my-1
+    }
+    .post-content p {
+        @apply !mb-4 ltr:leading-8
+    }
+
+    .s-heading1 {
+        @apply text-4xl font-semibold rtl:leading-13
+    }
+    
+    .s-heading2 { 
+        @apply text-2xl font-semibold rtl:leading-12
+    }
+    
+    .s-heading3 { 
+        @apply text-xl font-black rtl:leading-11
+    }
+    
+    .s-heading4 { 
+        @apply text-lg font-black rtl:leading-10
+    }
+    
+    .s-heading5 { 
+        @apply text-base font-black rtl:leading-9
+    }
+    
+    .s-heading6 { 
+        @apply text-sm font-bold rtl:leading-8
+    }
+    
+    .s-subtitle1 {
+        @apply text-base font-black rtl:leading-9;
+    }
+    
+    .s-subtitle2 {
+        @apply text-sm font-bold rtl:leading-8;
+    }
+    
+    .s-body1 {
+        @apply text-base rtl:leading-9;
+    }
+    
+    .s-body2 {
+        @apply text-sm rtl:leading-8;
+    }
+    
+    .s-caption {
+        @apply text-xs rtl:leading-8;
+    }
+    
+    .s-overline {
+        @apply text-xs rtl:leading-8;
+    }
+
+    .s-quote {
+        @apply text-base rtl:leading-9 italic;
+    }
+}
