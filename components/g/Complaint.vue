@@ -12,9 +12,10 @@
                     <v-row>
                         <s-text-field v-model="form.attributes.name" half :label="$t('name_family')"
                             validations="required"></s-text-field>
-                        <s-autocomplete v-model="form.attributes.country_id" :label="$t('country')" :items="countryItems"
-                            hide-no-data :search-input.sync="countrySearchInput" item-value="id" :item-text="generateText"
-                            :loading="countryLoading" @keyup="countrySearchInput != '' && countrySearch(countrySearchInput)"
+                        <s-autocomplete v-model="form.attributes.country_id" :label="$t('country')"
+                            :items="countryItems" hide-no-data :search-input.sync="countrySearchInput" item-value="id"
+                            :item-text="generateText" :loading="countryLoading"
+                            @keyup="countrySearchInput != '' && countrySearch(countrySearchInput)"
                             @focus="!countryItems.length && countrySearch('')" validations="required" half />
                         <s-text-field v-model="form.attributes.city" half :label="$t('city')"
                             validations="required"></s-text-field>
@@ -32,8 +33,8 @@
                             validations="required"></s-text-field>
                         <s-select v-model="form.attributes.type" half :items="select" :label="$t('classification')"
                             validations="required" outlined></s-select>
-                        <s-textarea v-model="form.attributes.description" outlined rows="4" :label="$t('description_comp')"
-                            validations="required"></s-textarea>
+                        <s-textarea v-model="form.attributes.description" outlined rows="4"
+                            :label="$t('description_comp')" validations="required"></s-textarea>
                     </v-row>
                 </s-form>
             </div>

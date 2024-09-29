@@ -90,7 +90,7 @@
                                             :background-color="$s.dark ? 'cyan darken-5' : 'yellow lighten-4'"
                                             :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor" :length="length"
                                             dir="ltr"></s-otp-input>
-                                            <!-- ssssssss -->
+                                        <!-- ssssssss -->
                                         <div class="flex justify-center w-full mt-4">
                                             <!-- <div v-if="timer === 0" class="font-bold text-xl cursor-pointer"
                                                 @click="requestNewOtp">
@@ -283,7 +283,7 @@ export default {
             }
 
             try {
-                const response = await this.$axios.get(`/api-auth/login/?phone_number=${this.phoneNumber}`);
+                const response = await this.$axios.get(`https://warranty.liara.run/api-auth/login/?phone_number=${this.phoneNumber}`);
 
                 if (response.status === 200) {
                     this.otpStep = true;
@@ -307,7 +307,7 @@ export default {
 
         async submitLoginOtp() {
             try {
-                const response = await this.$axios.post('/api-auth/login/', {
+                const response = await this.$axios.post('https://warranty.liara.run/api-auth/login/', {
                     phone_number: this.phoneNumber,
                     otp: this.otp
                 });
@@ -333,7 +333,7 @@ export default {
             }
 
             try {
-                const response = await this.$axios.post('/api-auth/register/', {
+                const response = await this.$axios.post('https://warranty.liara.run/api-auth/register/', {
                     full_name: this.registerData.name,
                     phone_number: this.registerData.phone,
                     national_id: this.registerData.id,
@@ -355,7 +355,7 @@ export default {
         },
 
         submitRegisterOtp() {
-            this.$axios.post('/api-auth/register-otp/', {
+            this.$axios.post('https://warranty.liara.run/api-auth/register-otp/', {
                 phone_number: this.registerData.phone,
                 otp: this.otp
             })

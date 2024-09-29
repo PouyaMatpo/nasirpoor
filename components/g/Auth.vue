@@ -210,7 +210,7 @@ export default {
             this.timer = 120;
             this.startTimer();
             try {
-                const response = await this.$axios.get(`/api-auth/request-new-otp/?phone_number=${this.phoneNumber}`);
+                const response = await this.$axios.get(`https://warranty.liara.run/api-auth/request-new-otp/?phone_number=${this.phoneNumber}`);
                 if (response.status !== 200) {
                     this.$store.commit('setFailSnackbar', { message: 'Failed to request new OTP.' });
                 }
@@ -222,7 +222,7 @@ export default {
             this.timer = 120;
             this.startTimer();
             try {
-                const response = await this.$axios.get(`/api-auth/request-new-otp-register/?phone_number=${this.registerData.phone}`);
+                const response = await this.$axios.get(`https://warranty.liara.run/api-auth/request-new-otp-register/?phone_number=${this.registerData.phone}`);
                 if (response.status !== 200) {
                     this.$store.commit('setFailSnackbar', { message: 'Failed to request new OTP for registration.' });
                 }
@@ -236,7 +236,7 @@ export default {
                 return;
             }
             try {
-                const response = await this.$axios.get(`/api-auth/login/?phone_number=${this.phoneNumber}`);
+                const response = await this.$axios.get(`https://warranty.liara.run/api-auth/login/?phone_number=${this.phoneNumber}`);
                 if (response.status === 200) {
                     this.$store.commit('setAuthPhone', this.phoneNumber);
                     this.$store.commit('setAuthStep', 2);
@@ -257,7 +257,7 @@ export default {
         },
         async submitLoginOtp() {
             try {
-                const response = await this.$axios.post('/api-auth/login/', {
+                const response = await this.$axios.post('https://warranty.liara.run/api-auth/login/', {
                     phone_number: this.phoneNumber,
                     otp: this.otp
                 });
@@ -279,7 +279,7 @@ export default {
                 return;
             }
             try {
-                const response = await this.$axios.post('/api-auth/register/', {
+                const response = await this.$axios.post('https://warranty.liara.run/api-auth/register/', {
                     full_name: this.registerData.name,
                     phone_number: this.registerData.phone,
                     national_id: this.registerData.national_id,
@@ -298,7 +298,7 @@ export default {
         },
         async submitRegisterOtp() {
             try {
-                const response = await this.$axios.post('/api-auth/register-otp/', {
+                const response = await this.$axios.post('https://warranty.liara.run/api-auth/register-otp/', {
                     phone_number: this.registerData.phone,
                     otp: this.otp
                 });

@@ -93,7 +93,7 @@ export default {
 
     modules: [
         '@nuxtjs/axios',
-        '@nuxtjs/proxy',
+        // '@nuxtjs/proxy',
         '@luxdamore/nuxt-prune-html',
         '@nuxtjs/i18n',
         '@nuxtjs/sitemap',
@@ -102,30 +102,30 @@ export default {
     ],
 
     axios: {
-        proxy: true, // Enable proxy
+        // proxy: true, // Enable proxy
         // baseURL is optional; it's useful when you want to set a common base URL for API calls
         // baseURL: 'http://localhost:3000'
     },
 
-    proxy: {
-        // Proxy all requests that start with /api-auth/ to the target backend
-        '/api-auth/': {
-            target: 'https://warranty.liara.run', // The target backend URL
-            changeOrigin: true, // Ensure the origin matches the target server's origin
-            secure: false, // Use false if the server uses a self-signed certificate
+    // proxy: {
+    //     // Proxy all requests that start with /api-auth/ to the target backend
+    //     '/api-auth/': {
+    //         target: 'https://warranty.liara.run', // The target backend URL
+    //         changeOrigin: true, // Ensure the origin matches the target server's origin
+    //         secure: false, // Use false if the server uses a self-signed certificate
 
-            // Rewrite the path for specific endpoints, while leaving others intact
-            pathRewrite: function (path, req) {
-                if (path.startsWith('/api-auth/warranty')) {
-                    // For warranty-related requests, remove /api-auth/
-                    return path.replace('/api-auth', '');
-                } else {
-                    // For other requests, leave /api-auth/ intact
-                    return path;
-                }
-            }
-        }
-    },
+    //         // Rewrite the path for specific endpoints, while leaving others intact
+    //         pathRewrite: function (path, req) {
+    //             if (path.startsWith('/api-auth/warranty')) {
+    //                 // For warranty-related requests, remove /api-auth/
+    //                 return path.replace('/api-auth', '');
+    //             } else {
+    //                 // For other requests, leave /api-auth/ intact
+    //                 return path;
+    //             }
+    //         }
+    //     }
+    // },
 
 
     build: {
