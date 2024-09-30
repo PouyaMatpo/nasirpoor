@@ -29,14 +29,14 @@ export default {
     },
 
     head: {
-        titleTemplate: '%s | ' + process.env.SITE_NAME,
-        title: process.env.SITE_NAME,
+        titleTemplate: '%s | ' + 'شرکت صنعت دوخت و برش پردیس',
+        title: 'شرکت صنعت دوخت و برش پردیس',
         htmlAttrs: { dir: 'ltr', lang: 'en-GB', prefix: 'og: http://ogp.me/ns#' },
         meta: [
             // ---> global <---
             { hid: 'theme-color', name: 'theme-color', content: '#00897B' },
             { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=5.0' },
-            { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: process.env.SITE_NAME },
+            { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: 'شرکت صنعت دوخت و برش پردیس' },
             { hid: 'charset', 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
 
             // ---> seo <---
@@ -46,8 +46,8 @@ export default {
             { hid: 'og:locale', property: 'og:locale', content: 'en_GB' },
             { hid: 'og:locale:alternate', property: 'og:locale:alternate', content: 'fa_IR' },
             { hid: 'og:type', property: 'og:type', content: 'website' },
-            { hid: 'og:site_name', property: 'og:site_name', content: process.env.SITE_NAME },
-            { hid: 'og:title', property: 'og:title', content: process.env.SITE_NAME },
+            { hid: 'og:site_name', property: 'og:site_name', content: 'شرکت صنعت دوخت و برش پردیس' },
+            { hid: 'og:title', property: 'og:title', content: 'شرکت صنعت دوخت و برش پردیس' },
             { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' }
         ],
         link: [
@@ -347,14 +347,14 @@ export default {
     },
 
     publicRuntimeConfig: {
-        SITE_NAME: process.env.SITE_NAME
+        SITE_NAME: 'شرکت صنعت دوخت و برش پردیس'
     },
 
     pwa: {
         manifest: {
             lang: 'en-GB',
-            short_name: process.env.SITE_NAME,
-            name: process.env.SITE_NAME,
+            // short_name: process.env.SITE_NAME,
+            // name: process.env.SITE_NAME,
             version: '1.0.0',
             start_url: process.env.SITE_URL + '/?standalone=true',
             display: 'standalone',
