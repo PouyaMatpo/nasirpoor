@@ -126,8 +126,6 @@ export const mutations = {
                 isLoggedIn: true,
                 userName: name
             }
-            console.log('set kardam', state.auth);
-
 
             this.$cookies.set('token', token, { maxAge: 31556952, path: '/' })
             this.$cookies.set('userName', name, { maxAge: 31556952, path: '/' })
