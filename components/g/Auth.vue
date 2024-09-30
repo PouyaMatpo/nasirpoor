@@ -263,7 +263,7 @@ export default {
                 });
                 if (response.status === 200) {
                     const { access } = response.data;
-                    this.$store.commit('setAuthToken', { token: access, name: this.phoneNumber });
+                    this.$store.commit('setAuthToken', { token: access, name: access });
                     this.$router.push('/warranty');
                 } else {
                     this.$store.commit('setFailSnackbar', { message: 'Invalid OTP. Please try again.' });

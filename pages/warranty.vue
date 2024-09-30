@@ -103,6 +103,7 @@ export default {
                 // بررسی موفقیت درخواست
                 if (response.status === 200 || response.status === 201) {
                     this.$store.commit('setSuccessSnackbar', { message: `گارانتی با موفقیت ثبت شد.` });
+                    this.$router.push('/warranty-list');
                     this.$refs.registerForm.reset();
                 }
             } catch (error) {
