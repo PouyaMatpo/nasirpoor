@@ -272,7 +272,7 @@ export default {
     },
 
     sitemap: {
-        hostname: process.env.SITE_URL,
+        hostname: 'nasirpoor.shop',
         path: '/sitemap.xml',
         xslUrl: '/sitemap-style.xsl',
         sitemaps: [
@@ -357,7 +357,7 @@ export default {
             // short_name: process.env.SITE_NAME,
             // name: process.env.SITE_NAME,
             version: '1.0.0',
-            start_url: process.env.SITE_URL + '/?standalone=true',
+            start_url: 'nasirpoor.shop' + '/?standalone=true',
             display: 'standalone',
             background_color: '#ffffff',
             theme_color: '#F44336',

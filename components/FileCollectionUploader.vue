@@ -33,7 +33,7 @@ export default {
     props: {
         uploadUrl: {
             type: String,
-            required: true // Assuming this is required now, to enable server interaction
+            required: false // Assuming this is required now, to enable server interaction
         },
         types: {
             type: String,
@@ -53,7 +53,7 @@ export default {
         },
         labelIdle: {
             type: String,
-            default: "برای بارگذاری کلیک کنید یا فایل خود را در این قسمت رها کنید"
+            default: "برای بارگذاری تصویر تراکنش خود کلیک کنید یا فایل خود را در این قسمت رها کنید"
         }
     },
 

@@ -5,41 +5,114 @@
             <div class="py-6">
 
                 <!-- پیام در صورت نبود هیچ گارانتی -->
+                <!-- پیام در صورت نبود هیچ گارانتی -->
                 <div
-                    v-if="!loading && unapprovedWarranties.length === 0 && awaitingPaymentWarranties.length === 0 && paidWarranties.length === 0">
-                    <p>محصولی برای گارانتی ثبت نکرده‌اید.</p>
+                    v-if="!loading && unapprovedWarranties.length === 0 && awaitingPaymentWarranties.length === 0 && paidWarranties.length === 0 && approvedPaidWarranties.length === 0">
+                    <g-text data="محصولی برای گارانتی ثبت نکرده‌اید." />
                 </div>
 
                 <!-- لیست گارانتی‌های ثبت‌شده -->
                 <div v-if="loading || unapprovedWarranties.length > 0">
-                    <g-text class="py-6" data="لیست گارانتی‌های در انتظار ثبت جهت پرداخت" />
+                    <g-text class="py-2 font-semibold text-lg" data="لیست گارانتی‌های در انتظار ثبت جهت پرداخت" />
                     <div v-if="loading">
                         <p>در حال بارگذاری اطلاعات...</p>
                     </div>
                     <div v-else>
-                        <div v-for="(warranty, index) in unapprovedWarranties" :key="index" class="p-4 my-4 rounded-3xl"
+                        <div v-for="(warranty, index) in unapprovedWarranties" :key="index"
+                            class="p-4 my-4 rounded-3xl "
                             :style="$s.dark ? 'background-color: #1d283a;' : 'background-color: #FFF9C4;'">
-                            <p><strong>نوع دستگاه:</strong> {{ typeOfs[warranty.types - 1] }}</p>
-                            <p><strong>مدل:</strong> {{ warranty.model }}</p>
-                            <p><strong>سریال:</strong> {{ warranty.serial }}</p>
-                            <p><strong>تاریخ شروع گارانتی:</strong>
-                                <span dir="ltr">
-                                    {{ warranty.date }}
-                                </span>
-                            </p>
-                            <p><strong>تاریخ پایان گارانتی:</strong>
-                                <span dir="ltr">
-                                    {{ warranty.end_date }}
-                                </span>
-                            </p>
-                            <p><strong>مبلغ دستگاه گارانتی شده:</strong> {{ warranty.price }} تومان</p>
+                            <g-text class="py-2 font-semibold" data="مشخصات دستگاه: " />
+                            <div class="flex flex-wrap gap-2">
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>نوع دستگاه:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ typeOfs[warranty.types - 1] }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مدل:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.model }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>سریال:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.serial }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>تاریخ شروع گارانتی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <span dir="ltr">
+                                                {{ warranty.date }}
+                                            </span>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>تاریخ پایان گارانتی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <span dir="ltr">
+                                                {{ warranty.end_date }}
+                                            </span>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مبلغ دستگاه گارانتی شده:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.price }} تومان
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- لیست گارانتی‌های در انتظار پرداخت -->
                 <div v-if="loading || awaitingPaymentWarranties.length > 0">
-                    <g-text class="py-6" data="لیست گارانتی‌های ثبت شده در انتظار پرداخت" />
+                    <g-text class="py-2 font-semibold text-lg" data="لیست گارانتی‌های ثبت شده در انتظار پرداخت" />
                     <div v-if="loading">
                         <p>در حال بارگذاری اطلاعات...</p>
                     </div>
@@ -47,22 +120,116 @@
                         <div v-for="(warranty, index) in awaitingPaymentWarranties" :key="index"
                             class="p-4 my-4 rounded-3xl"
                             :style="$s.dark ? 'background-color: #1d283a;' : 'background-color: #FFF9C4;'">
-                            <p><strong>نوع دستگاه:</strong> {{ typeOfs[warranty.types - 1] }}</p>
-                            <p><strong>مدل:</strong> {{ warranty.model }}</p>
-                            <p><strong>سریال:</strong> {{ warranty.serial }}</p>
-                            <p><strong>تاریخ شروع گارانتی:</strong>
-                                <span dir="ltr">
-                                    {{ warranty.date }}
-                                </span>
-                            </p>
-                            <p><strong>تاریخ پایان گارانتی:</strong>
-                                <span dir="ltr">
-                                    {{ warranty.end_date }}
-                                </span>
-                            </p>
-                            <p><strong>مبلغ دستگاه گارانتی شده:</strong> {{ warranty.price }} تومان</p>
-                            <p><strong>مبلغ قابل پرداخت (۱۰٪):</strong> {{ calculateTenPercent(warranty.price) }} تومان
-                            </p>
+                            <g-text class="py-2 font-semibold" data="مشخصات دستگاه: " />
+                            <div class="flex flex-wrap gap-2">
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>نوع دستگاه:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ typeOfs[warranty.types - 1] }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مدل:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.model }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>سریال:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.serial }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>تاریخ شروع گارانتی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <span dir="ltr">
+                                                {{ warranty.date }}
+                                            </span>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>تاریخ پایان گارانتی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <span dir="ltr">
+                                                {{ warranty.end_date }}
+                                            </span>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مبلغ دستگاه گارانتی شده:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.price }} تومان
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مبلغ قابل پرداخت (۱۰٪):</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ calculateTenPercent(warranty.price) }} تومان
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <p>
+                                    جهت پرداخت هزینه ی گارانتی مبلغ
+                                    <strong
+                                        :class="$s.dark ? 'cyan--text text--darken-4' : 'amber--text text--darken-4'">
+                                        {{ calculateTenPercent(warranty.price) }} تومان
+                                    </strong>
+                                    را به حساب
+                                    <strong dir="ltr"
+                                        :class="$s.dark ? 'cyan--text text--darken-4' : 'amber--text text--darken-4'">6037-9988-0027-4176</strong>
+                                    بنام صنعت دوخت وبرش پردیس واریز کنید سپس شماره فیش واریزی و عکس تراکنش خود را در
+                                    کادر زیر آپلود کنید!
+                                </p>
+                            </div>
                             <s-text-field v-model="warranty.serial_payment" :color="$store.state.pageColor" rounded="xl"
                                 label="شماره فیش واریزی" type="number" validations="required" />
                             <s-col>
@@ -78,39 +245,261 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- لیست گارانتی‌های پرداخت‌شده -->
+                <!-- لیست گارانتی‌های پرداخت‌شده در انتظار تایید نهایی -->
                 <div v-if="loading || paidWarranties.length > 0">
-                    <g-text class="py-6" data="لیست گارانتی‌های پرداخت شده در انتظار تایید نهایی" />
+                    <g-text class="py-2 font-semibold text-lg"
+                        data="لیست گارانتی‌های پرداخت شده در انتظار تایید نهایی" />
                     <div v-if="loading">
                         <p>در حال بارگذاری اطلاعات...</p>
                     </div>
                     <div v-else>
                         <div v-for="(warranty, index) in paidWarranties" :key="index" class="p-4 my-4 rounded-3xl"
                             :style="$s.dark ? 'background-color: #1d283a;' : 'background-color: #FFF9C4;'">
-                            <p><strong>نوع دستگاه:</strong> {{ typeOfs[warranty.level1.types - 1] }}</p>
-                            <p><strong>مدل:</strong> {{ warranty.level1.model }}</p>
-                            <p><strong>سریال:</strong> {{ warranty.level1.serial }}</p>
-                            <p><strong>تاریخ شروع گارانتی:</strong>
-                                <span dir="ltr">
-                                    {{ warranty.level1.date }}
-                                </span>
-                            </p>
-                            <p><strong>تاریخ پایان گارانتی:</strong>
-                                <span dir="ltr">
-                                    {{ warranty.level1.end_date }}
-                                </span>
-                            </p>
-                            <p><strong>مبلغ پرداخت‌شده:</strong> {{ calculateTenPercent(warranty.level1.price) }} تومان
-                            </p>
-                            <p><strong>شماره فیش واریزی:</strong> {{ warranty.serial_payment }}</p>
-                            <p><strong>رسید پرداخت:</strong>
-                                <a :href="warranty.payment_receipt" target="_blank">مشاهده تصویر</a>
-                            </p>
+                            <g-text class="py-2 font-semibold" data="مشخصات دستگاه: " />
+                            <div class="flex flex-wrap gap-2">
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>نوع دستگاه:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ typeOfs[warranty.level1.types - 1] }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مدل:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.level1.model }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>سریال:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.level1.serial }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>تاریخ شروع گارانتی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <span dir="ltr">
+                                                {{ warranty.level1.date }}
+                                            </span>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>تاریخ پایان گارانتی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <span dir="ltr">
+                                                {{ warranty.level1.end_date }}
+                                            </span>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مبلغ پرداخت‌شده:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ calculateTenPercent(warranty.level1.price) }} تومان
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>شماره فیش واریزی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.serial_payment }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>رسید پرداخت:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <a :href="warranty.payment_receipt" target="_blank"
+                                                style="text-decoration: none;"
+                                                :style="$s.dark ? 'color: cyan;' : 'color: #00ACC1;'">برای مشاهده ی
+                                                تصویر واریزی خود کلیک کنید!</a>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+                <!-- لیست دستگاه‌های گارانتی شده -->
+                <div v-if="loading || approvedPaidWarranties.length > 0">
+                    <g-text class="py-2 font-semibold text-lg" data="لیست گارانتی های تکمیل شده" />
+                    <div v-if="loading">
+                        <p>در حال بارگذاری اطلاعات...</p>
+                    </div>
+                    <div v-else>
+                        <div v-for="(warranty, index) in approvedPaidWarranties" :key="index"
+                            class="p-4 my-4 rounded-3xl"
+                            :style="$s.dark ? 'background-color: #1d283a;' : 'background-color: #FFF9C4;'">
+                            <g-text class="py-2 font-semibold" data="مشخصات دستگاه: " />
+                            <div class="flex flex-wrap gap-2">
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>نوع دستگاه:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ typeOfs[warranty.level1.types - 1] }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مدل:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.level1.model }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>سریال:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.level1.serial }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>تاریخ شروع گارانتی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <span dir="ltr">
+                                                {{ warranty.level1.date }}
+                                            </span>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>تاریخ پایان گارانتی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <span dir="ltr">
+                                                {{ warranty.level1.end_date }}
+                                            </span>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>مبلغ پرداخت‌شده:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ calculateTenPercent(warranty.level1.price) }} تومان
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>شماره فیش واریزی:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            {{ warranty.serial_payment }}
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                                <s-chip rounded="pill" large
+                                    :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor + ' lighten-3'">
+                                    <p>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <strong>رسید پرداخت:</strong>
+                                        </s-chip>
+                                        <s-chip rounded="pill"
+                                            :color="$s.dark ? 'cyan darken-4' : $store.state.pageColor + ' lighten-5'">
+                                            <a :href="warranty.payment_receipt" target="_blank"
+                                                style="text-decoration: none;"
+                                                :style="$s.dark ? 'color: cyan;' : 'color: #00ACC1;'">
+                                                برای مشاهده ی تصویر واریزی خود کلیک کنید!
+                                            </a>
+                                        </s-chip>
+                                    </p>
+                                </s-chip>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </g-container>
     </div>
@@ -138,7 +527,8 @@ export default {
         return {
             typeOfs: ['چرخ خیاطی', 'اتو پرس', 'اتو مخزن دار'],
             warranties: [], // لیست گارانتی‌های کاربر
-            paidWarranties: [], // لیست گارانتی‌های پرداخت‌شده
+            paidWarranties: [], // لیست گارانتی‌های پرداخت‌شده در انتظار تایید نهایی
+            approvedPaidWarranties: [], // لیست گارانتی‌های پرداخت‌شده و تایید نهایی‌شده
             unapprovedWarranties: [], // لیست گارانتی‌های ثبت‌شده
             awaitingPaymentWarranties: [], // لیست گارانتی‌های در انتظار پرداخت
             file: null,
@@ -179,7 +569,7 @@ export default {
 
                 if (responseLevel2.status === 200) {
                     // ترکیب گارانتی‌های لول 2 با اطلاعات لول 1
-                    this.paidWarranties = responseLevel2.data.map(level2Warranty => {
+                    responseLevel2.data.forEach(level2Warranty => {
                         const level1Warranty = this.warranties.find(warranty => warranty.id === level2Warranty.level1);
 
                         // حذف گارانتی از لیست در انتظار پرداخت
@@ -187,10 +577,18 @@ export default {
                             warranty => warranty.id !== level2Warranty.level1
                         );
 
-                        return {
+                        const completeWarranty = {
                             ...level2Warranty,
-                            level1: level1Warranty
+                            level1: level1Warranty,
                         };
+
+                        if (level2Warranty.is_approved) {
+                            // اضافه کردن به لیست گارانتی‌های تایید نهایی شده
+                            this.approvedPaidWarranties.push(completeWarranty);
+                        } else {
+                            // اضافه کردن به لیست گارانتی‌های در انتظار تایید نهایی
+                            this.paidWarranties.push(completeWarranty);
+                        }
                     });
                 }
 
@@ -201,6 +599,7 @@ export default {
                 this.loading = false;
             }
         },
+
         calculateTenPercent(price) {
             return Math.round(price * 0.1); // محاسبه ده درصد مبلغ
         },

@@ -52,22 +52,26 @@
         <template v-slot:PowerdSection>
             <g-container>
                 <div v-if="$s.mdAndUp" class="flex gap-2 items-center justify-between mt-10">
-                    <div class="flex gap-2 items-center text-sm">
-                        <g-text>کلیه حقوق این وب سایت متعلق به</g-text>
-                        <g-text darkColor="cyan--text text--darken-3" color="amber--text text--darken-2"
-                            class="font-semibold">شرکت صنعت دوخت و برش
-                            پردیس</g-text>
-                        <g-text>با مسئولیت محدود و شماره ثبت 2441 میباشد!</g-text>
-                    </div>
+                    <p class="text-sm">
+                        کلیه حقوق این وب سایت متعلق به
+                        <strong dir="ltr"
+                            :class="$s.dark ? 'cyan--text text--darken-4' : 'amber--text text--darken-3'">شرکت صنعت
+                            دوخت و برش پردیس</strong>
+                        با مسئولیت محدود و شماره ثبت 2441 میباشد!
+                    </p>
                     <div dir="ltr">
                         2024-Pardis©
                     </div>
                 </div>
                 <div v-if="$s.smAndDown" class="md:flex gap-2 items-center justify-between mt-10">
                     <div class="text-sm">
-                        <g-text data="کلیه حقوق این وب سایت متعلق به
-شرکت صنعت دوخت و برش پردیس
-با مسئولیت محدود و شماره ثبت 2441 میباشد!" />
+                        <p>
+                            کلیه حقوق این وب سایت متعلق به
+                            <strong dir="ltr"
+                                :class="$s.dark ? 'cyan--text text--darken-4' : 'amber--text text--darken-3'">شرکت صنعت
+                                دوخت و برش پردیس</strong>
+                            با مسئولیت محدود و شماره ثبت 2441 میباشد!
+                        </p>
                     </div>
                     <div class="mt-4" dir="ltr">
                         2024-Pardis©
