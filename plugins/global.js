@@ -36,7 +36,7 @@ export default ({ i18n, $axios, $config, route }, inject) => {
         if (head) {
             if (head.title) {
                 tags.title = head.title
-                tags.meta.push({ hid: 'og:title', property: 'og:title', content: head.title + ' - ' + $config.SITE_NAME })
+                tags.meta.push({ hid: 'og:title', property: 'og:title', content: head.title + ' - ' + 'شرکت صنعت دوخت و برش پردیس' })
             }
 
             if (head.description) {
