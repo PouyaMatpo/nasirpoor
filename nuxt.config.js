@@ -34,7 +34,8 @@ export default {
         htmlAttrs: { dir: 'ltr', lang: 'en-GB', prefix: 'og: http://ogp.me/ns#' },
         meta: [
             // ---> global <---
-            { hid: 'theme-color', name: 'theme-color', content: '#00897B' },
+            { hid: 'theme-color-light', name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#ffc107' },
+            { hid: 'theme-color-dark', name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#3e1b00' },
             { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=5.0' },
             { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: process.env.SITE_NAME },
             { hid: 'charset', 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },

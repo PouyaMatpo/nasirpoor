@@ -30,7 +30,6 @@ export default {
         head.htmlAttrs.lang = this.$i18n.locale;
         head.htmlAttrs.class = this.$s.dark ? 'theme--dark' : 'theme--light';
         head.script = [{ type: 'application/ld+json', json: this.structuredData }]
-        head.meta.push({ hid: 'theme-color', name: 'theme-color', content: this.$s.dark ? '#0d1019' : '#fffac3' })
         return head;
     },
 
