@@ -281,7 +281,6 @@ export default {
                 this.$store.commit('setFailSnackbar', { message: 'Please enter a valid phone number.' });
                 return;
             }
-            // ssss
 
             try {
                 const response = await this.$axios.get(`https://warranty.liara.run/api-auth/login/?phone_number=${this.phoneNumber}`);

@@ -93,7 +93,7 @@ export default {
                 }
 
                 // ارسال درخواست POST با استفاده از Axios
-                const response = await this.$axios.post('https://warranty.liara.run/api-auth/warranty/level1/', payload, {
+                const response = await this.$axios.post('https://warranty.liara.run/warranty/level1/', payload, {
                     headers: {
                         Authorization: `Bearer ${token}`, // استفاده از توکن از حالت (store)
                         'Content-Type': 'application/json',

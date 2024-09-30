@@ -156,7 +156,7 @@ export default {
                 }
 
                 // دریافت گارانتی‌های لول 1 (ثبت‌شده)
-                const response = await this.$axios.get('https://warranty.liara.run/api-auth/warranty/level1/', {
+                const response = await this.$axios.get('https://warranty.liara.run/warranty/level1/', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -171,7 +171,7 @@ export default {
                 }
 
                 // دریافت گارانتی‌های پرداخت‌شده (لول 2)
-                const responseLevel2 = await this.$axios.get('https://warranty.liara.run/api-auth/warranty/level2/', {
+                const responseLevel2 = await this.$axios.get('https://warranty.liara.run/warranty/level2/', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -224,7 +224,7 @@ export default {
             formData.append('serial_payment', warranty.serial_payment);
             formData.append('level1_id', warranty.id);
 
-            await this.$axios.post('https://warranty.liara.run/api-auth/warranty/level2/submit/', formData, {
+            await this.$axios.post('https://warranty.liara.run/warranty/level2/submit/', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
