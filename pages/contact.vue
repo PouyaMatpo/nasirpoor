@@ -13,7 +13,7 @@
                     <div v-for="(item, i) in contacts" :key="i">
                         <!-- Add conditional class here -->
                         <g-map :class="[i === 1 ? 'mt-8' : 'mt-0']" rounded="rounded-3xl" icon="../sewing-machine.png"
-                            :lat="item?.lat" :long="item?.lng" zoom="16" height="h-[20rem]" />
+                            :lat="item?.lat" :long="item?.lng" zoom="17" height="h-[20rem]" />
                         <div class="md:h-1/2 rounded-3xl flex flex-col justify-between">
                             <div>
                                 <div class="pt-8 pb-4">
@@ -90,8 +90,8 @@ export default {
                     ]
                 },
                 {
-                    lat: '32.00724904517025',
-                    lng: '51.86208744838702',
+                    lat: '32.0072771',
+                    lng: '51.8617813',
                     title1: 'شعبه دوم',
                     title: 'نمایشگاه چرخ خیاطی نصیرپور',
                     address: 'شهرضا خیابان حکیم فرزانه میدان پیروزی اول خیابان حکیم اسداله (سجادیه)',

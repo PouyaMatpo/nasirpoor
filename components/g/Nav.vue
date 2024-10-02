@@ -77,7 +77,7 @@ export default {
         return {
             menu: [
                 {
-                    title: 'خانه',
+                    title: 'ورود یا ثبت نام',
                     slug: '/',
                 },
                 {
