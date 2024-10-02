@@ -3,7 +3,7 @@
         <g-container>
             <div class="flex justify-between md:items-center md:gap-6 md:flex-row flex-col-reverse">
                 <div class="md:w-1/2">
-                    <g-text class="py-2 font-semibold text-lg" data="ثبت کارت ضمانت طلایی" />
+                    <g-text class="py-2 font-semibold text-lg" data="ثبت کارت گارانتی طلایی و بیمه نامه" />
                     <s-form class="pb-20" color="transparent" xs="block" @submit.prevent="submitRegister"
                         ref="registerForm" noActions>
 

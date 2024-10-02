@@ -34,8 +34,8 @@ export default {
         htmlAttrs: { dir: 'ltr', lang: 'en-GB', prefix: 'og: http://ogp.me/ns#' },
         meta: [
             // ---> global <---
-            { hid: 'theme-color-light', name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#ffc107' },
             { hid: 'theme-color-dark', name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#3e1b00' },
+            { hid: 'theme-color', name: 'theme-color', content: '#00897B' },
             { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=5.0' },
             { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: 'شرکت صنعت دوخت و برش پردیس' },
             { hid: 'charset', 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
@@ -357,7 +357,7 @@ export default {
             // short_name: process.env.SITE_NAME,
             // name: process.env.SITE_NAME,
             version: '1.0.0',
-            start_url: 'nasirpoor.shop' + '/?standalone=true',
+            start_url: 'https://nasirpoor.shop/',
             display: 'standalone',
             background_color: '#ffffff',
             theme_color: '#F44336',
