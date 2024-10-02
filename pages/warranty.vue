@@ -10,6 +10,9 @@
                         <s-select v-model="formData.type" rounded="xl" :color="$store.state.pageColor" :items="typeOfs"
                             label="نوع دستگاه" validations="required" outlined></s-select>
 
+                        <s-text-field v-model="formData.brand_name" :color="$store.state.pageColor" rounded="xl"
+                            label="نام برند" validations="required"></s-text-field>
+
                         <s-text-field v-model="formData.model" :color="$store.state.pageColor" rounded="xl" label="مدل"
                             validations="required"></s-text-field>
 
@@ -59,10 +62,11 @@ export default {
         return {
             typeOfs: ['چرخ خیاطی', 'اتو پرس', 'اتو مخزن دار'],
             formData: {
-                type: null,  // نوع دستگاه
-                model: '',   // مدل دستگاه
-                serial: '',  // شماره سریال
-                price: null, // مبلغ
+                type: null,       // نوع دستگاه
+                brand_name: '',   // نام برند
+                model: '',        // مدل دستگاه
+                serial: '',       // شماره سریال
+                price: null,      // مبلغ
             },
         };
     },
@@ -80,6 +84,7 @@ export default {
                 // ایجاد payload برای ارسال به سرور
                 const payload = {
                     types: typeIndex,
+                    brand_name: this.formData.brand_name,
                     model: this.formData.model,
                     serial: this.formData.serial,
                     price: this.formData.price,

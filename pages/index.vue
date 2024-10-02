@@ -118,6 +118,9 @@
                                         <s-textarea :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor"
                                             rounded="xl" v-model="registerData.address" label="آدرس"
                                             validations="required"></s-textarea>
+                                        <s-text-field :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor"
+                                            rounded="xl" v-model="registerData.postal_code" label="کد پستی"
+                                            type="number" validations="required"></s-text-field>
                                         <template v-slot:actions>
                                             <div class="!p-2 w-full">
                                                 <s-btn aria-label="register" @click="handleRegister" rounded="pill"
@@ -192,7 +195,8 @@ export default {
                 name: '',
                 id: '',
                 phone: '',
-                address: ''
+                address: '',
+                postal_code: ''
             },
             showLogin: true,
             showRegister: false,
@@ -278,7 +282,7 @@ export default {
         },
         async submitRegisterOtp() {
             this.formSubmitted = true;
-            if (!this.registerData.name || !this.registerData.id || !this.registerData.address || !this.otp) {
+            if (!this.registerData.name || !this.registerData.id || !this.registerData.address || !this.registerData.postal_code || !this.otp) {
                 this.$store.commit('setFailSnackbar', { message: 'تمامی فیلدهای ضروری وارد نشده‌اند.' });
                 return;
             }
@@ -288,7 +292,8 @@ export default {
                     full_name: this.registerData.name,
                     national_id: this.registerData.id,
                     otp: this.otp,
-                    address: this.registerData.address
+                    address: this.registerData.address,
+                    postal_code: this.registerData.postal_code // Added postal code to the request payload
                 });
 
                 if (response.data && response.data.access) {
@@ -302,6 +307,7 @@ export default {
                 this.$store.commit('setFailSnackbar', { message: 'ثبت‌نام ناموفق بود. لطفاً دوباره تلاش کنید.' });
             }
         },
+
         async submitOtp() {
             try {
                 const response = await this.$axios.post('https://warranty.liara.run/api-auth/login/', {
