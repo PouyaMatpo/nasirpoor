@@ -90,7 +90,7 @@ export default {
         return {
             footer: [
                 {
-                    title: 'ورود یا ثبت نام',
+                    title: 'ورود',
                     link: '/',
                     _items: [
                         {
@@ -151,7 +151,7 @@ export default {
         // فیلتر کردن آیتم‌های منو بر اساس وضعیت ورود کاربر
         filteredFooter() {
             return this.footer.map((section) => {
-                if (section.title === 'ورود یا ثبت نام') {
+                if (section.title === 'ورود') {
                     return {
                         ...section,
                         _items: section._items.filter((item) => {

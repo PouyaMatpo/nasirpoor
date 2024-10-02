@@ -175,7 +175,7 @@ export default {
 
     head() {
         return this.$headBuilder({
-            title: 'ورود یا ثبت نام',
+            title: 'ورود',
             description: 'با مسئولیت محدود و شماره ثبت 2441'
         })
     },
