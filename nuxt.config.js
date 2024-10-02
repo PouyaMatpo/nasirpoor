@@ -359,7 +359,7 @@ export default {
             version: '1.0.0',
             start_url: 'https://nasirpoor.shop/',
             display: 'standalone',
-            background_color: '#ffffff',
+            background_color: '#fffac3',
             theme_color: '#F44336',
             orientation: 'portrait-primary',
             icons: [
