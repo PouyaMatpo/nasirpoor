@@ -616,7 +616,7 @@ export default {
                 return;
             }
 
-            console.log('Access Token:', token);
+            // console.log('Access Token:', token);
 
             const formData = new FormData();
             if (this.file) formData.append('payment_receipt', this.file);

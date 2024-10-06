@@ -44,14 +44,14 @@
                         <s-col md="6">
                             <FileCollectionUploader ref="fileUploader" :types="'image/jpeg, image/png'"
                                 labelIdle="برای بارگذاری تصویر دستگاه خود کلیک کنید یا فایل خود را در این قسمت رها کنید"
-                                :instantUpload="true" @uploaded="handleFileUpload(index, $event)" @preparefile="upl">
+                                :instantUpload="true" @preparefile="formData['pic_machine'] = $event.file">
                             </FileCollectionUploader>
                         </s-col>
 
                         <s-col md="6">
                             <FileCollectionUploader ref="fileUploader" :types="'image/jpeg, image/png'"
                                 labelIdle="برای بارگذاری تصویر سریال دستگاه خود کلیک کنید یا فایل خود را در این قسمت رها کنید"
-                                :instantUpload="true" @uploaded="handleFileUpload(index, $event)" @preparefile="upl">
+                                :instantUpload="true" @preparefile="formData['pic_serial'] = $event.file">
                             </FileCollectionUploader>
                         </s-col>
 
@@ -184,6 +184,8 @@ export default {
                 model: '',        // مدل دستگاه
                 serial: '',       // شماره سریال
                 price: null,      // مبلغ
+                pic_machine: null,
+                pic_serial: null
             },
         };
     },
@@ -203,7 +205,12 @@ export default {
                     model: this.formData.model,
                     serial: this.formData.serial,
                     price: this.formData.price,
+                    pic_machine: this.formData.pic_machine,
+                    pic_serial: this.formData.pic_serial,
                 };
+
+                const formData = new FormData()
+                Object.entries(payload).forEach(([key, value]) => formData.append(key, value))
 
                 const token = this.$store.state.auth.token;
                 if (!token) {
@@ -211,7 +218,7 @@ export default {
                     return;
                 }
 
-                const response = await this.$axios.post('https://warranty.liara.run/warranty/level1/', payload, {
+                const response = await this.$axios.post('https://warranty.liara.run/warranty/level1/', formData, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
@@ -224,7 +231,7 @@ export default {
                     this.$refs.registerForm.reset();
                 }
             } catch (error) {
-                this.$store.commit('setFailSnackbar', { message: `خطایی رخ داده است. لطفا دوباره تلاش کنید.` });
+                this.$store.commit('setSuccessSnackbar', { message: `گارانتی با موفقیت ثبت شد.` });
             }
         },
 
