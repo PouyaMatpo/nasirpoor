@@ -41,6 +41,20 @@
                         <s-text-field v-model="formData.price" :color="$store.state.pageColor" rounded="xl"
                             label="مبلغ دستگاه گارانتی شده:" type="number" validations="required"></s-text-field>
 
+                        <s-col md="6">
+                            <FileCollectionUploader ref="fileUploader" :types="'image/jpeg, image/png'"
+                                labelIdle="برای بارگذاری تصویر دستگاه خود کلیک کنید یا فایل خود را در این قسمت رها کنید"
+                                :instantUpload="true" @uploaded="handleFileUpload(index, $event)" @preparefile="upl">
+                            </FileCollectionUploader>
+                        </s-col>
+
+                        <s-col md="6">
+                            <FileCollectionUploader ref="fileUploader" :types="'image/jpeg, image/png'"
+                                labelIdle="برای بارگذاری تصویر سریال دستگاه خود کلیک کنید یا فایل خود را در این قسمت رها کنید"
+                                :instantUpload="true" @uploaded="handleFileUpload(index, $event)" @preparefile="upl">
+                            </FileCollectionUploader>
+                        </s-col>
+
                         <template v-slot:actions>
                             <div class="!p-2 w-full">
                                 <s-btn aria-label="register" @click="submitRegister" rounded="pill" large class="w-full"
