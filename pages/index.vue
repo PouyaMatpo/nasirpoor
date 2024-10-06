@@ -361,7 +361,28 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.v-otp-input .v-input {
+    margin: 0;
+    flex: 1 0 32px;
+    max-width: 100%;
+    width: 100%;
+    padding: 4px;
+    border-radius: 24px;
+}
+
+.v-dialog {
+    border-radius: 26px;
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12);
+    margin: 24px;
+    outline: none;
+    overflow-y: auto;
+    pointer-events: auto;
+    transition: .3s cubic-bezier(.25, .8, .25, 1);
+    width: 100%;
+    z-index: inherit;
+}
+
 .linkColor {
     color: #8a98e6 !important;
     cursor: pointer;
