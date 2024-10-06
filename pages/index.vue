@@ -246,7 +246,6 @@ export default {
                     this.startTimer();
                     this.$store.commit('setSuccessSnackbar', { message: `پیامک حاوی کد تایید به شماره ${this.phoneNumber} ارسال شد.` });
                 } else if (response.status === 404) {
-                    await this.sendOtpForRegistration();
                     this.switchToRegister();
                     this.registerData.phone = this.phoneNumber; // Set phone number in register data
                     this.phoneNotFound = true;
@@ -254,7 +253,6 @@ export default {
                 }
             } catch (error) {
                 if (error.response && error.response.status === 404) {
-                    await this.sendOtpForRegistration();
                     this.switchToRegister();
                     this.registerData.phone = this.phoneNumber;
                     this.phoneNotFound = true;
@@ -264,6 +262,7 @@ export default {
                 }
             }
         },
+
         async sendOtpForRegistration() {
             try {
                 const response = await this.$axios.get(`https://warranty.liara.run/api-auth/register/?phone_number=${this.phoneNumber}`);
@@ -275,11 +274,28 @@ export default {
             }
         },
         async handleRegister() {
+            // اطمینان از اینکه تمام اطلاعات لازم وارد شده‌اند
+            if (!this.registerData.name || !this.registerData.id || !this.registerData.phone || !this.registerData.address || !this.registerData.postal_code) {
+                this.$store.commit('setFailSnackbar', { message: 'تمامی فیلدهای ضروری وارد نشده‌اند.' });
+                return;
+            }
+
             // هدایت به مرحله OTP برای ثبت نام
             this.registerOtpStep = true;
-            this.startTimer();
-            this.$store.commit('setSuccessSnackbar', { message: `پیامک حاوی کد تایید به شماره ${this.registerData.phone} ارسال شد.` });
+
+            try {
+                const response = await this.$axios.get(`https://warranty.liara.run/api-auth/register/?phone_number=${this.registerData.phone}`);
+                if (response.status === 200) {
+                    this.startTimer();
+                    this.$store.commit('setSuccessSnackbar', { message: `پیامک حاوی کد تایید به شماره ${this.registerData.phone} ارسال شد.` });
+                } else {
+                    throw new Error('Failed to send OTP for registration');
+                }
+            } catch (error) {
+                this.$store.commit('setFailSnackbar', { message: 'ارسال OTP برای ثبت‌نام ناموفق بود. لطفاً دوباره تلاش کنید.' });
+            }
         },
+
         async submitRegisterOtp() {
             this.formSubmitted = true;
             if (!this.registerData.name || !this.registerData.id || !this.registerData.address || !this.registerData.postal_code || !this.otp) {
