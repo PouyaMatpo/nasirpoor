@@ -232,8 +232,8 @@
                             </div>
                             <s-text-field v-model="warranty.serial_payment" :color="$store.state.pageColor" rounded="xl"
                                 label="شماره فیش واریزی" type="number" validations="required" />
-                            <s-text-field v-model="warranty.code" :color="$store.state.pageColor" rounded="xl"
-                                label="کد گارانتی" type="number" />
+                            <s-text-field v-model="warranty.code" validations="required" :color="$store.state.pageColor"
+                                rounded="xl" label="کد گارانتی" type="number" />
                             <s-col>
                                 <FileCollectionUploader ref="fileUploader" :types="'image/jpeg, image/png'"
                                     :instantUpload="true" @uploaded="handleFileUpload(index, $event)"
