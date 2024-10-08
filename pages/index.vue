@@ -2,7 +2,6 @@
     <div :style="$s.dark ? 'background-color: #1d283a;' : 'background-color: #FFFDE7;'">
         <g-container>
             <div class="flex md:flex-row flex-col justify-between py-10 gap-8">
-                <!-- Check if user is logged in -->
                 <div v-if="isLoggedIn" class="flex md:flex-row flex-col justify-between gap-8">
                     <div class="md:w-1/2">
                         <s-image :skeletonColor="$s.dark ? '#1d283a' : '#fffde8'" aspect-ratio="1.2" class="rounded-3xl"
@@ -247,7 +246,7 @@ export default {
                     this.$store.commit('setSuccessSnackbar', { message: `پیامک حاوی کد تایید به شماره ${this.phoneNumber} ارسال شد.` });
                 } else if (response.status === 404) {
                     this.switchToRegister();
-                    this.registerData.phone = this.phoneNumber; // Set phone number in register data
+                    this.registerData.phone = this.phoneNumber;
                     this.phoneNotFound = true;
                     this.$store.commit('setSuccessSnackbar', { message: `کاربر یافت نشد. لطفاً ثبت‌نام کنید.` });
                 }
@@ -274,15 +273,11 @@ export default {
             }
         },
         async handleRegister() {
-            // اطمینان از اینکه تمام اطلاعات لازم وارد شده‌اند
             if (!this.registerData.name || !this.registerData.id || !this.registerData.phone || !this.registerData.address || !this.registerData.postal_code) {
                 this.$store.commit('setFailSnackbar', { message: 'تمامی فیلدهای ضروری وارد نشده‌اند.' });
                 return;
             }
-
-            // هدایت به مرحله OTP برای ثبت نام
             this.registerOtpStep = true;
-
             try {
                 const response = await this.$axios.get(`https://warranty.liara.run/api-auth/register/?phone_number=${this.registerData.phone}`);
                 if (response.status === 200) {
@@ -309,7 +304,7 @@ export default {
                     national_id: this.registerData.id,
                     otp: this.otp,
                     address: this.registerData.address,
-                    postal_code: this.registerData.postal_code // Added postal code to the request payload
+                    postal_code: this.registerData.postal_code
                 });
 
                 if (response.data && response.data.access) {

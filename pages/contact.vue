@@ -11,7 +11,6 @@
                 </template>
                 <template v-slot:ContentSection>
                     <div v-for="(item, i) in contacts" :key="i">
-                        <!-- Add conditional class here -->
                         <g-map :class="[i === 1 ? 'mt-8' : 'mt-0']" rounded="rounded-3xl" icon="../sewing-machine.png"
                             :lat="item?.lat" :long="item?.lng" zoom="17" height="h-[20rem]" />
                         <div class="md:h-1/2 rounded-3xl flex flex-col justify-between">

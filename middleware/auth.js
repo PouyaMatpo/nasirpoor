@@ -5,7 +5,7 @@ export default function ({ store, redirect, route }) {
 
     // اگر کاربر به یکی از این صفحات دسترسی پیدا کند و لاگین نباشد، او را به صفحه اصلی هدایت می‌کنیم
     if (restrictedRoutes.includes(route.path)) {
-      return redirect('/?loginError=true');
+      return redirect('/');
     }
   }
 }

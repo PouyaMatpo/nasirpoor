@@ -1,7 +1,6 @@
 <template>
     <div :style="$s.dark ? 'background-color: #1d283a;' : 'background-color: #FFFDE7;'">
         <g-container>
-            <!-- دیالوگ هشدار برای مطالعه شرایط گارانتی -->
             <s-falcon :overlay="{ parentClass: 'backdrop-blur-xl' }"
                 :sw-options="{ childClass: $s.dark ? 'cyan darken-5 md:!overflow-y-hidden !overflow-y-auto !rounded-t-lg md:!rounded-none' : $store.state.pageColor + ' lighten-6 md:!overflow-y-hidden !overflow-y-auto !rounded-t-lg md:!rounded-none' }"
                 :viva="openDia" xs="dialog" width="500" :overlayZIndex="5" no-click-animation persistent>
@@ -168,22 +167,20 @@ export default {
         if (this.$route.query.loginError) {
             this.$store.commit('setFailSnackbar', { message: `لطفا ابتدا وارد حساب کاربری خود شوید.` });
         }
-
-        // نمایش دیالوگ شرایط گارانتی در هنگام ورود به صفحه
         this.openWarningDia = true;
     },
 
     data() {
         return {
             openDia: true,
-            openWarningDia: false,  // متغیر برای باز و بسته کردن دیالوگ هشدار
+            openWarningDia: false,
             typeOfs: ['چرخ خیاطی', 'اتو پرس', 'اتو مخزن دار'],
             formData: {
-                type: null,       // نوع دستگاه
-                brand_name: '',   // نام برند
-                model: '',        // مدل دستگاه
-                serial: '',       // شماره سریال
-                price: null,      // مبلغ
+                type: null,
+                brand_name: '',
+                model: '',
+                serial: '',
+                price: null,
                 pic_machine: null,
                 pic_serial: null
             },
@@ -236,13 +233,14 @@ export default {
         },
 
         scrollToWarrantyTerms() {
-            // بستن دیالوگ
             this.openDia = false;
-
-            // اسکرول به بخش شرایط گارانتی
             const warrantyTermsElement = document.querySelector('#warranty-terms');
             if (warrantyTermsElement) {
-                warrantyTermsElement.scrollIntoView({ behavior: 'smooth' });
+                const offsetTop = warrantyTermsElement.getBoundingClientRect().top + window.pageYOffset - 100;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth',
+                });
             }
         },
     },

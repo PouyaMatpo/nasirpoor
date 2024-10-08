@@ -40,11 +40,8 @@
                                         </v-btn>
                                     </template>
                                     <v-list>
-                                        <v-list-item disabled @click="goToProfile">
+                                        <v-list-item @click="goToProfile">
                                             <v-list-item-title>پروفایل</v-list-item-title>
-                                        </v-list-item>
-                                        <v-list-item @click="goToWarrantyList">
-                                            <v-list-item-title>لیست گارانتی های ثبت شده</v-list-item-title>
                                         </v-list-item>
                                         <v-list-item @click="logout">
                                             <v-list-item-title>خروج</v-list-item-title>
@@ -424,9 +421,6 @@ export default {
         goToProfile() {
             this.$router.push('/profile');
         },
-        goToWarrantyList() {
-            this.$router.push('/warranty-list');
-        },
         logout() {
             this.$store.commit('clearAuthToken'); // حذف اطلاعات ورود
             this.$router.push('/'); // ریدایرکت به صفحه اصلی
@@ -445,6 +439,10 @@ export default {
 </script>
 
 <style lang="scss">
+.v-menu__content {
+    border-radius: 24px !important;
+}
+
 .navigation-container {
 
     .v-navigation-drawer {

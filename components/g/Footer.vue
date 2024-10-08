@@ -111,22 +111,22 @@ export default {
                             title: 'ارتباط با ما',
                             link: '/contact',
                         },
-                        {
-                            title: 'مسئولیت های اجتماعی',
-                            link: '/social-responsibility',
-                        },
-                        {
-                            title: 'سیاست حفظ حریم خصوصی',
-                            link: '/privacy-policy',
-                        },
-                        {
-                            title: 'شرایط خدمات',
-                            link: '/terms-of-service',
-                        },
-                        {
-                            title: 'سیاست کوکی',
-                            link: '/cookie-policy',
-                        },
+                        // {
+                        //     title: 'مسئولیت های اجتماعی',
+                        //     link: '/social-responsibility',
+                        // },
+                        // {
+                        //     title: 'سیاست حفظ حریم خصوصی',
+                        //     link: '/privacy-policy',
+                        // },
+                        // {
+                        //     title: 'شرایط خدمات',
+                        //     link: '/terms-of-service',
+                        // },
+                        // {
+                        //     title: 'سیاست کوکی',
+                        //     link: '/cookie-policy',
+                        // },
                     ]
                 }
             ],
