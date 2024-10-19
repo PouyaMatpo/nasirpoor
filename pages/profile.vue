@@ -13,7 +13,7 @@
                     :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor" required />
                 <s-text-field rounded="xl" v-model="profileData.postal_code" label="کد پستی" type="number"
                     :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor" required />
-                <s-text-field rounded="xl" v-model="profileData.code" label="کد"
+                <s-text-field rounded="xl" v-model="profileData.code" label="کد کاربر"
                     :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor" readonly />
                 <s-btn type="submit" class="my-4" rounded="pill" large
                     :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor">

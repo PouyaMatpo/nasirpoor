@@ -1,24 +1,23 @@
 <template>
     <div :style="$s.dark ? 'background-color: #1d283a;' : 'background-color: #FFFDE7;'">
+        <s-falcon :overlay="{ parentClass: 'backdrop-blur-xl' }"
+            :sw-options="{ childClass: $s.dark ? 'cyan darken-5 md:!overflow-y-hidden !overflow-y-auto !rounded-t-lg md:!rounded-none' : $store.state.pageColor + ' lighten-6 md:!overflow-y-hidden !overflow-y-auto !rounded-t-lg md:!rounded-none' }"
+            :viva="openDia" xs="dialog" width="500" :overlayZIndex="5" no-click-animation persistent>
+            <template #title>
+                <g-falcon-title @close-falcon="openDia = false" />
+            </template>
+            <g-container>
+                <g-text :color="$store.state.pageColor + '--text text--darken-4'" class="font-bold text-xl"
+                    data="لطفا قبل از ثبت، شرایط گارانتی را به دقت مطالعه کنید." />
+                <div class="flex justify-center py-4">
+                    <s-btn @click="scrollToWarrantyTerms" rounded="pill" large
+                        :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor">
+                        <g-text data="مطالعه شرایط" />
+                    </s-btn>
+                </div>
+            </g-container>
+        </s-falcon>
         <g-container>
-            <s-falcon :overlay="{ parentClass: 'backdrop-blur-xl' }"
-                :sw-options="{ childClass: $s.dark ? 'cyan darken-5 md:!overflow-y-hidden !overflow-y-auto !rounded-t-lg md:!rounded-none' : $store.state.pageColor + ' lighten-6 md:!overflow-y-hidden !overflow-y-auto !rounded-t-lg md:!rounded-none' }"
-                :viva="openDia" xs="dialog" width="500" :overlayZIndex="5" no-click-animation persistent>
-                <template #title>
-                    <g-falcon-title @close-falcon="openDia = false" />
-                </template>
-                <g-container>
-                    <g-text :color="$store.state.pageColor + '--text text--darken-4'" class="font-bold text-xl"
-                        data="لطفا قبل از ثبت، شرایط گارانتی را به دقت مطالعه کنید." />
-                    <div class="flex justify-center py-4">
-                        <s-btn @click="scrollToWarrantyTerms" rounded="pill" large
-                            :color="$s.dark ? 'cyan darken-3' : $store.state.pageColor">
-                            <g-text data="مطالعه شرایط" />
-                        </s-btn>
-                    </div>
-                </g-container>
-            </s-falcon>
-
             <div class="flex justify-between md:items-center md:gap-6 md:flex-row flex-col-reverse">
                 <div class="md:w-1/2">
                     <g-text class="!py-4 md:!py-8 font-semibold text-lg" data="ثبت کارت گارانتی طلایی و بیمه نامه" />
@@ -117,7 +116,8 @@
                     </li>
                     <li>
                         ⚡ برای چرخ‌های کارگاهی و خانگی کامپیوتری، استفاده از <span
-                            class="font-bold text-purple-700">محافظ برق صنعت
+                            class="font-bold text-purple-700">محافظ برق
+                            صنعت
                             دوخت و برش پردیس</span> الزامی است.
                     </li>
                     <li>
@@ -138,7 +138,8 @@
                     </li>
                     <li>
                         📸 برای <span class="font-bold text-cyan-700">ثبت گارانتی</span>، ارائه <span
-                            class="text-blue-700">عکس از
+                            class="text-blue-700">عکس
+                            از
                             دستگاه و قسمت سریال آن</span> الزامی است.
                     </li>
                     <li>
@@ -192,7 +193,13 @@ export default {
             try {
                 const typeIndex = this.typeOfs.indexOf(this.formData.type) + 1;
                 if (typeIndex === 0) {
-                    this.$store.commit('setFailSnackbar', { message: `نوع دستگاه را انتخاب کنید` });
+                    this.$store.commit('setFailSnackbar', { message: 'نوع دستگاه را انتخاب کنید' });
+                    return;
+                }
+
+                // Validate required fields
+                if (!this.formData.pic_machine || !this.formData.pic_serial) {
+                    this.$store.commit('setFailSnackbar', { message: 'لطفاً عکس دستگاه و سریال آن را بارگذاری کنید.' });
                     return;
                 }
 
@@ -206,29 +213,29 @@ export default {
                     pic_serial: this.formData.pic_serial,
                 };
 
-                const formData = new FormData()
-                Object.entries(payload).forEach(([key, value]) => formData.append(key, value))
+                const formData = new FormData();
+                Object.entries(payload).forEach(([key, value]) => formData.append(key, value));
 
                 const token = this.$store.state.auth.token;
                 if (!token) {
-                    this.$store.commit('setFailSnackbar', { message: `توکن احراز هویت یافت نشد. لطفاً وارد حساب کاربری خود شوید.` });
+                    this.$store.commit('setFailSnackbar', { message: 'توکن احراز هویت یافت نشد. لطفاً وارد حساب کاربری خود شوید.' });
                     return;
                 }
 
                 const response = await this.$axios.post('https://warranty.liara.run/warranty/level1/', formData, {
                     headers: {
                         Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'multipart/form-data',
                     },
                 });
 
                 if (response.status === 200 || response.status === 201) {
-                    this.$store.commit('setSuccessSnackbar', { message: `گارانتی با موفقیت ثبت شد.` });
+                    this.$store.commit('setSuccessSnackbar', { message: 'گارانتی با موفقیت ثبت شد.' });
                     this.$router.push('/warranty-list');
                     this.$refs.registerForm.reset();
                 }
             } catch (error) {
-                this.$store.commit('setSuccessSnackbar', { message: `گارانتی با موفقیت ثبت شد.` });
+                this.$store.commit('setSuccessSnackbar', { message: 'گارانتی با موفقیت ثبت شد.' });
             }
         },
 
@@ -248,6 +255,18 @@ export default {
 </script>
 
 <style lang="scss">
+.v-dialog {
+    border-radius: 26px;
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12);
+    margin: 0px !important;
+    outline: none;
+    overflow-y: auto;
+    pointer-events: auto;
+    transition: .3s cubic-bezier(.25, .8, .25, 1);
+    width: 100%;
+    z-index: inherit;
+}
+
 .v-list-item__title,
 .v-list-item__subtitle {
     flex: 1 1 100%;

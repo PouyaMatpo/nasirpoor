@@ -10,7 +10,7 @@
                     <div class="w-full text-center py-20 md:w-1/2">
                         <h2 class="text-2xl font-bold mb-4">کاربر گرامی، شما وارد سیستم شده‌اید.</h2>
                         <p class="text-lg">
-                            شما با شماره <strong>{{ loggedInPhoneNumber }}</strong> در حال استفاده از پنل هستید. برای
+                            شما با حساب <strong>{{ loggedInPhoneNumber }}</strong> در حال استفاده از پنل هستید. برای
                             ورود مجدد ابتدا باید از حساب خود خارج شوید.
                         </p>
                         <s-btn @click="logout" rounded="pill" large class="mt-6"
