@@ -119,41 +119,45 @@ export const mutations = {
         state.auth.id = id
     },
 
-    setAuthToken(state, { token, name }) {
-        if (token && name) {
+    setAuthUser(state, user) {
+        state.auth.user = user
+    },
+
+    setAuthToken(state, { token, user }) {
+        if (token && user) {
             state.auth = {
                 token: token,
                 isLoggedIn: true,
-                userName: name
+                user
             }
 
             this.$cookies.set('token', token, { maxAge: 31556952, path: '/' })
-            this.$cookies.set('userName', name, { maxAge: 31556952, path: '/' })
         }
     },
+
     clearAuthToken(state) {
         state.auth.token = null;
         state.auth.isLoggedIn = false;
-        state.auth.userName = null;
-        state.auth.phone = null;
+        state.auth.user = {};
 
         this.$cookies.remove('token')
-        this.$cookies.remove('userName')
     }
 };
 
 export const actions = {
-    loadAuthData({ commit }) {
+    async nuxtServerInit({ commit, state }, { req, redirect }) {
+        console.log('state', state);
+
         const token = this.$cookies.get('token')
         if (token) {
-            commit('setAuthToken', { token, name: this.$cookies.get('userName') ?? 'user' });
-        }
-    },
+            await this.$axios.get('https://warranty.liara.run/api-auth/me/', { headers: { Authorization: `Bearer ${token}` } })
+                .then(res => commit('setAuthToken', { token, user: res.data }))
+                .catch(err => commit('clearAuthToken'));
 
-    async nuxtServerInit({ dispatch }) {
-        await dispatch('loadAuthData');  // بارگذاری اطلاعات کاربر از localStorage در ابتدای شروع برنامه
+            if (!state.auth.isLoggedIn && req.originalUrl != '/') redirect('/');
+        }
     }
-};
+}
 
 
 export const getters = {

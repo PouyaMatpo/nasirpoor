@@ -215,7 +215,7 @@ export default {
             return this.$store.getters.isLoggedIn;
         },
         loggedInPhoneNumber() {
-            return this.$store.state.auth.userName || this.$store.state.auth.phone;
+            return this.$store.state.auth.user.full_name || this.$store.state.auth.user.phone_number; // نمایش نام کاربر یا شماره موبایل
         }
     },
     methods: {
@@ -308,8 +308,7 @@ export default {
                 });
 
                 if (response.data && response.data.access) {
-                    const { access, full_name } = response.data;
-                    this.$store.commit('setAuthToken', { token: access, name: full_name });
+                    this.$store.commit('setAuthToken', { token: response.data.access, user: response.data });
                     this.$router.push('/warranty');
                 } else {
                     this.$store.commit('setFailSnackbar', { message: response.data.error || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.' });
@@ -326,8 +325,7 @@ export default {
                     otp: this.otp
                 });
                 if (response.data && response.data.access) {
-                    const { access, full_name } = response.data;
-                    this.$store.commit('setAuthToken', { token: access, name: full_name });
+                    this.$store.commit('setAuthToken', { token: response.data.access, user: response.data });
                     this.$router.push('/warranty');
                 } else {
                     this.$store.commit('setFailSnackbar', { message: response.data.error || 'خطایی رخ داد. لطفاً دوباره تلاش کنید.' });

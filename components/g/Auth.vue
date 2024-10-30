@@ -175,8 +175,8 @@ export default {
             return this.otp.length === this.length;
         },
         authButtonText() {
-            if (this.$store.getters.isLoggedIn && this.$store.state.auth.userName) {
-                return this.$store.state.auth.userName;
+            if (this.$store.getters.isLoggedIn && this.$store.state.auth.user.full_name) {
+                return this.$store.state.auth.user.full_name;
             }
             return this.$l({ en: 'Login / Register', fa: 'ورود / ثبت نام' });
         },
@@ -262,8 +262,7 @@ export default {
                     otp: this.otp
                 });
                 if (response.status === 200) {
-                    const { access } = response.data;
-                    this.$store.commit('setAuthToken', { token: access, name: access });
+                    this.$store.commit('setAuthToken', { token: response.data.access, user: response.data });
                     this.$router.push('/warranty');
                 } else {
                     this.$store.commit('setFailSnackbar', { message: 'Invalid OTP. Please try again.' });
@@ -303,8 +302,7 @@ export default {
                     otp: this.otp
                 });
                 if (response.status === 200) {
-                    const { access } = response.data;
-                    this.$store.commit('setAuthToken', { token: access, name: this.registerData.phone });
+                    this.$store.commit('setAuthToken', { token: response.data.access, user: response.data });
                     this.$router.push('/warranty');
                 } else {
                     this.$store.commit('setFailSnackbar', { message: 'Invalid OTP. Please try again.' });

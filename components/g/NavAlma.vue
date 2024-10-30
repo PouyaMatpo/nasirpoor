@@ -263,7 +263,7 @@ export default {
             return this.$store.getters.isLoggedIn;
         },
         userName() {
-            return this.$store.state.auth.userName || this.$store.state.auth.phone; // نمایش نام کاربر یا شماره موبایل
+            return this.$store.state.auth.user.full_name || this.$store.state.auth.user.phone_number; // نمایش نام کاربر یا شماره موبایل
         }
     },
 

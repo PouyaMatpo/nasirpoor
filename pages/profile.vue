@@ -63,7 +63,13 @@ export default {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
-                });
+                })
+                    .then(res => {
+                        this.$store.commit('setAuthUser', res.data)
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
 
                 this.$store.commit('setSuccessSnackbar', { message: 'پروفایل با موفقیت به‌روزرسانی شد.' });
 
