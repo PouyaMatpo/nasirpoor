@@ -41,7 +41,7 @@ export default {
         },
         size: {
             type: Number,
-            default: 1000000
+            default: 6000000
         },
         instantUpload: {
             type: Boolean,
